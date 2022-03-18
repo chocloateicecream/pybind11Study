@@ -23,13 +23,30 @@ void addmessage()
     //test push command on github
 }
 
-PYBIND11_MODULE(example, m)//
+struct Pet
 {
-    m.doc()="pybind11 example plugin";// optional module docstring
+    Pet(const std::string &name):name(name){}
+    void setName(const std::string &name_){name=name_;}
+    const std::string &getName() const {return name;}
 
-    m.def("add",&add, "A function that adds two numbers");
+    std::string name;
+};
+// int main(){}
+// PYBIND11_MODULE(example, m)//
+// {
+//     m.doc()="pybind11 example plugin";// optional module docstring
 
-    m.def("deduct",&deduct,"A function that deduct two numbers");
+//     m.def("add",&add, "A function that adds two numbers");
 
-    m.def("hello",&hello, "a functions that print some message");
+//     m.def("deduct",&deduct,"A function that deduct two numbers");
+
+//     m.def("hello",&hello, "a function that print some message");
+// }
+
+PYBIND11_MODULE(example, m)
+{
+    py::class_<Pet>(m, "Pet")
+        .def(py::init<const std::string &>())
+        .def("setName",&Pet::setName)
+        .def("getName",&Pet::getName);
 }
