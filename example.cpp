@@ -18,6 +18,11 @@ void hello()
     std::cout<<"hello, pybind"<<std::endl;
 }
 
+void addmessage()
+{
+    //test push command on github
+}
+
 PYBIND11_MODULE(example, m)//
 {
     m.doc()="pybind11 example plugin";// optional module docstring
